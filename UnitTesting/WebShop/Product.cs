@@ -8,6 +8,7 @@ namespace WebShop
 {
     public enum Product
     {
-        Shampoo
+        Shampoo, 
+        Milk
     }
 }
