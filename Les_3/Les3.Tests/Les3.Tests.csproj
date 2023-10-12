@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Les3\Les3.csproj" />
+  </ItemGroup>
+
 </Project>
