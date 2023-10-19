@@ -12,11 +12,12 @@ namespace PersonAgeValidator
         public string LastName { get; set; }
         public int Age { get; set; }
 
-        private AgeValidator _ageValidator = new AgeValidator();
+        private IAgeValidator _ageValidator;
 
-        public Person(string firstName, string lastName, int age ) 
+        public Person(IAgeValidator validator, string firstName, string lastName, int age)
         {
-            
+            _ageValidator = validator;
+
             if (!_ageValidator.IsValidAge(age))
             {
                 throw new Exception("age invalid");
@@ -25,6 +26,11 @@ namespace PersonAgeValidator
             FirstName = firstName;
             LastName = lastName;
             Age = age;
+        }
+
+        public Person(string firstName, string lastName, int age) : this(new AgeValidator(), firstName, lastName, age)
+        {
+
         }
     }
 }

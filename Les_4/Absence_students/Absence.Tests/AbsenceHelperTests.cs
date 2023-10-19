@@ -1,5 +1,7 @@
 ﻿using Absence.Tests.TestDoubles;
 using FluentAssertions;
+using NuGet.Frameworks;
+using Xunit.Sdk;
 
 namespace Absence.Tests
 {
@@ -73,7 +75,7 @@ namespace Absence.Tests
 
             // Assert
 
-            act.Should().Throw<Success>();
+            act.Should().Throw<MethodCalled>();
 
         }
         [Fact]
@@ -92,12 +94,12 @@ namespace Absence.Tests
                 new List<(Student, DateOnly)> {
                     (s, new DateOnly(2023,1,3))
                 });
-                
+
             tracker.RemovedExcusedStudentWithDate.Should().BeEmpty();
             tracker.RemovedPresentStudentWithDate.Should().BeEquivalentTo(
                 new List<(Student, DateOnly)>{
                     (s, new DateOnly(2023, 1, 1)),
-                    (s, new DateOnly(2023, 1, 2)), 
+                    (s, new DateOnly(2023, 1, 2)),
                     (s, new DateOnly(2023, 1, 4))
                 });
         }
@@ -117,8 +119,68 @@ namespace Absence.Tests
             Action act = () => { AbsenceCheck? result = sut.CreateAbsenceCheck(present, excused); };
 
             // Assert
-            act.Should().Throw<StudentNotFoundException>().Which.NotFoundStudents.Should().BeEquivalentTo(new List<Student> { student1 });
+            act.Should().Throw<StudentNotFoundException>()
+                .Which.NotFoundStudents.Should().BeEquivalentTo(new List<Student> { student1 });
 
         }
+
+        [Fact]
+        public void AddNewStudent_WithNewStudentAndNoExistingAbsenceChecks_DoesntCallAddStudentAsAbsentToDay()
+        {
+            // Arrange
+            IAbsenceTracker absenceTracker = new AbsenceTrackerMock2();
+            AbsenceHelper sut = new AbsenceHelper(absenceTracker);
+            Student s = new Student("R1", "John", "Doe");
+
+            // Act
+            Action act = () => sut.AddNewStudent(s);
+
+            // Assert
+            act.Should().NotThrow<MethodCalled>();
+        }
+
+        [Fact]
+        public void RemoveStudent_WithNonExistingStudent_DoesntCallRemoveMethods()
+        {
+            // Arrange
+            IAbsenceTracker tracker = new AbsenceTrackerMock3();
+            AbsenceHelper sut = new AbsenceHelper(tracker);
+            Student s = new Student("R1", "John", "Doe");
+
+            // Act
+            Action act = () => sut.RemoveStudent(s);
+
+            // Assert
+            act.Should().NotThrow<MethodCalled>();
+        }
+
+        [Fact]
+        public void CountPercentageOfPresentStudentsOnDay_WithEverybodyPresent_Returns1()
+        {
+            // Arrange
+            IAbsenceTracker tracker = new AbsenceTrackerStub();
+            AbsenceHelper sut = new AbsenceHelper(tracker);
+
+            // Act
+            double result = sut.CountPercentageOfPresentStudentsOnDay(new DateOnly(2023, 1, 1));
+
+            // Assert
+            result.Should().Be(1.0);
+        }
+
+        [Fact]
+        public void CountPercentageOfPresentStudentsOnDay_ForDateWithNoAbsenceCheck_Returns0()
+        {
+            // Arrange
+            IAbsenceTracker tracker = new AbsenceTrackerStub2();
+            AbsenceHelper sut = new AbsenceHelper(tracker);
+
+            // Act
+            double result = sut.CountPercentageOfPresentStudentsOnDay(new DateOnly(2023, 1, 1));
+
+            // Assert
+            result.Should().Be(0.0);
+        }
+
     }
 }
