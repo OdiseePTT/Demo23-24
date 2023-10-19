@@ -8,7 +8,7 @@ namespace Absence
 {
     public class StudentNotFoundException: Exception
     {
-        IEnumerable<Student> NotFoundStudents { get; }
+        public IEnumerable<Student> NotFoundStudents { get; }
 
         public StudentNotFoundException(IEnumerable<Student> notFoundStudents)
         {
