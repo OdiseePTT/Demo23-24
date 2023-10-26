@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Absence", "Absence\Absence.csproj", "{A2825754-1CED-4576-977F-C1B3C753A8D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Absence.Tests", "Absence.Tests\Absence.Tests.csproj", "{1968FAE6-81F8-4618-BD7F-9E71B70D0A28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Absence.Tests", "Absence.Tests\Absence.Tests.csproj", "{1968FAE6-81F8-4618-BD7F-9E71B70D0A28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Absence.Tests.NSubstitute", "Absence.Tests.NSubstitute\Absence.Tests.NSubstitute.csproj", "{024FD5F0-E6C9-4F8C-AEFE-45674425E629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1968FAE6-81F8-4618-BD7F-9E71B70D0A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1968FAE6-81F8-4618-BD7F-9E71B70D0A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1968FAE6-81F8-4618-BD7F-9E71B70D0A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024FD5F0-E6C9-4F8C-AEFE-45674425E629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024FD5F0-E6C9-4F8C-AEFE-45674425E629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024FD5F0-E6C9-4F8C-AEFE-45674425E629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024FD5F0-E6C9-4F8C-AEFE-45674425E629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

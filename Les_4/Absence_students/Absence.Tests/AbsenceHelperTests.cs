@@ -155,7 +155,7 @@ namespace Absence.Tests
         }
 
         [Fact]
-        public void CountPercentageOfPresentStudentsOnDay_WithEverybodyPresent_Returns1()
+        public void CountPercentageOfPresentStudentsOnDay_MetIedereenAanwezig_Geeft1Terug()
         {
             // Arrange
             IAbsenceTracker tracker = new AbsenceTrackerStub();
