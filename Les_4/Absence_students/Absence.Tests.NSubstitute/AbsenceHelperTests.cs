@@ -125,6 +125,48 @@ namespace Absence.Tests.NSubstitute
         }
 
 
+        [Fact]
+        public void CreateAbsenceCheck_With1StudentPresentAnd1studentAbsent_ReturnsCorrectAbsenceCheck()
+        {
+            // Arrange
+            IAbsenceTracker tracker = Substitute.For<IAbsenceTracker>();
+            AbsenceCheck absenceCheck = new AbsenceCheck();
+
+            tracker.When(sub => sub.AddStudentAsAbsentToToday(Arg.Any<Student>()))
+                .Do(callInfo => absenceCheck.AbsentStudents.Add(callInfo.ArgAt<Student>(0)));
+
+            tracker.When(sub => sub.AddStudentAsPresentToToday(Arg.Any<Student>()))
+               .Do(callInfo => absenceCheck.PresentStudents.Add(callInfo.ArgAt<Student>(0)));
+
+            tracker.When(sub => sub.AddStudentAsExcusedToToday(Arg.Any<Student>()))
+               .Do(callInfo => absenceCheck.ExcusedStudents.Add(callInfo.ArgAt<Student>(0)));
+
+            tracker.GetAbsenceChecks().Returns(new List<AbsenceCheck>());
+
+            tracker.GetAbsenceCheckOnDate(default).ReturnsForAnyArgs(_ => absenceCheck);
+
+            AbsenceHelper sut = new AbsenceHelper(tracker);
+
+            Student student1 = new Student("R1", "John", "Doe");
+            Student student2 = new Student("R2", "Jane", "Doe");
+            
+            List<Student> present = new List<Student> { student1 };
+            List<Student> excused = new List<Student>();
+
+            sut.AddNewStudent(student1);
+            sut.AddNewStudent(student2);
+
+            // Act
+            AbsenceCheck? result = sut.CreateAbsenceCheck(present, excused);
+
+            // Assert
+            result.PresentStudents.Should().BeEquivalentTo(new List<Student> { student1 });
+            result.ExcusedStudents.Should().BeEmpty();
+            result.AbsentStudents.Should().BeEquivalentTo(new List<Student> { student2 });
+
+        }
+
+
         private AbsenceCheck GetAbsenceCheckWithEverybodyPresent()
         {
             return new AbsenceCheck()

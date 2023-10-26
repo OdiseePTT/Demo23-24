@@ -70,7 +70,7 @@ namespace Phonebook.Tests
             // Assert
             contacts.Should().BeEquivalentTo(expectedResult);
         }
-        /*
+        
         [Fact]
         //
         // Firstname en Lastname langer dan 2 karakters
@@ -79,22 +79,32 @@ namespace Phonebook.Tests
         public void AddContact_MetCorrecteData_ContactWordtToegevoegdEnCorrectContactObjectWordtGemaakt()
         {
             // Arrange
-            IPhoneBook phoneBookTestDouble;
+            IPhoneBook phoneBookTestDouble = Substitute.For<IPhoneBook>();
+            phoneBookTestDouble.Contacts.Returns(new List<Contact>().ToImmutableList());
             PhoneBookOperations sut = new PhoneBookOperations(phoneBookTestDouble);
 
             // Act
             sut.AddContact("Matthias", "Druwé", "987654321");
 
-            // Assert
+            //
+            // 
+            phoneBookTestDouble.Received().AddContact(new Contact(0, "Matthias", "Druwé", "987654321"));
         }
 
         [Fact]
         public void AddQuickDial_MetOnbeschikbareSneltoets_GooitError()
         {
             // Arrange
-            IPhoneBook phoneBookTestDouble;
+            IPhoneBook phoneBookTestDouble = Substitute.For<IPhoneBook>();
+            phoneBookTestDouble.Contacts.Returns(new List<Contact>()
+        {
+            new Contact(1,"John", "Doe", "123456789"){Favorite = true},
+            new Contact(2,"Jane", "Doe", "987654321"){QuickDial = 5},
+
+        }.ToImmutableList());
+
             PhoneBookOperations sut = new PhoneBookOperations(phoneBookTestDouble);
-            Contact contact = null;
+            Contact contact = null; // dummy
 
 
             // Act
@@ -104,17 +114,20 @@ namespace Phonebook.Tests
             act.Should().Throw<ArgumentException>().WithParameterName("quickDialNumber");
         }
 
+
         [Fact]
         public void RemoveContact_WithContact_RemoveContactIsCalledOnPhonebook()
         {
             // Arrange
-            IPhoneBook phonebookTestDouble ;
+            IPhoneBook phonebookTestDouble = Substitute.For<IPhoneBook>();
             PhoneBookOperations sut = new PhoneBookOperations(phonebookTestDouble);
 
-            // Act + Assert
-            Action act  = () => sut.RemoveContact(null);
+            // Act
+            sut.RemoveContact(null);
 
+            // Assert
+            phonebookTestDouble.Received().RemoveContact(null);
             
-        }*/
+        }
     }
 }

@@ -23,5 +23,16 @@ namespace PhoneBook
         public string PhoneNumber { get; set; }
         public int? QuickDial { get; set; }
         public bool Favorite { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Contact contact &&
+                   Id == contact.Id &&
+                   FirstName == contact.FirstName &&
+                   LastName == contact.LastName &&
+                   PhoneNumber == contact.PhoneNumber &&
+                   QuickDial == contact.QuickDial &&
+                   Favorite == contact.Favorite;
+        }
     }
 }
