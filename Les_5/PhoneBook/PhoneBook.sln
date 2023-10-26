@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook", "PhoneBook\PhoneBook.csproj", "{D266D3E0-5CCB-4636-B560-522F12B977C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Tests", "Phonebook.Tests\Phonebook.Tests.csproj", "{49E11AD1-B009-41EE-B96B-191EB2682076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook.Tests", "Phonebook.Tests\Phonebook.Tests.csproj", "{49E11AD1-B009-41EE-B96B-191EB2682076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Tests.NSub", "PhoneBook.Tests.NSub\PhoneBook.Tests.NSub.csproj", "{3DEA6452-A4E8-4BD2-BAD1-541FE826F9E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{49E11AD1-B009-41EE-B96B-191EB2682076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49E11AD1-B009-41EE-B96B-191EB2682076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49E11AD1-B009-41EE-B96B-191EB2682076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DEA6452-A4E8-4BD2-BAD1-541FE826F9E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DEA6452-A4E8-4BD2-BAD1-541FE826F9E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DEA6452-A4E8-4BD2-BAD1-541FE826F9E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DEA6452-A4E8-4BD2-BAD1-541FE826F9E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
