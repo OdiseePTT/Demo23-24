@@ -1,6 +1,8 @@
 ﻿using AutoFixture;
+using FluentAssertions.Equivalency;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data.Common;
 
 namespace HigherLowerGame.Tests
@@ -41,12 +43,12 @@ namespace HigherLowerGame.Tests
 
             List<Person> persons = _fixture.Build<Person>()
                 .With(person => person.Id, 0)
-                .With(person => person.BirthDate, new DateTime(1990, 21,2))
+                .With(person => person.BirthDate, new DateTime(1990, 2,2))
                 .CreateMany().ToList();
 
 
             SeedDatabaseWithData(dbContext, persons);
-            PersonRepository sut = new PersonRepository(dbContext);
+            PersonRepository sut = new PersonRepository();
 
             // Act
             List<Person> actualPersons = sut.GetAllPersons();
@@ -76,7 +78,7 @@ namespace HigherLowerGame.Tests
 
             SeedDatabaseWithData(dbContext,personsWithBirtDateAfter2010);
             SeedDatabaseWithData(dbContext, personsWithBirtDateBefore2010);
-            PersonRepository sut = new PersonRepository(dbContext);
+            PersonRepository sut = new PersonRepository();
 
             // Act
             List<Person> persons = sut.GetAllPersonsWithBirthyearBelow(2010);
@@ -94,7 +96,7 @@ namespace HigherLowerGame.Tests
 
             // Arrange
             PersonDbContext context = CreateDbContext();
-            PersonRepository sut = new PersonRepository(context);
+            PersonRepository sut = new PersonRepository();
             DateTime CurrentDate = DateTime.Today;
 
             // Act
@@ -104,6 +106,8 @@ namespace HigherLowerGame.Tests
             context.Persons.Should().ContainEquivalentOf(new Person("Demo", "Demo", CurrentDate) { Id = 1 });
         }
 
+
+       
 
         private void SeedDatabaseWithData(PersonDbContext dbContext, List<Person> persons)
         {

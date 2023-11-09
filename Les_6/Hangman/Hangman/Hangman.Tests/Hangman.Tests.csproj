@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>PhoneBook.Tests.NSub</RootNamespace>
+    <RootNamespace>Hangman.Tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PhoneBook\PhoneBook.csproj" />
+    <ProjectReference Include="..\Hangman\Hangman.csproj" />
   </ItemGroup>
 
 </Project>
