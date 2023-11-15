@@ -6,7 +6,9 @@
 
 # This only needs to be installed once (globally), if installed it fails silently: 
 dotnet add package coverlet.collector
-dotnet add package ReportGenerator
+dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
+
+
 
 # Save currect directory into a variable
 $dir = pwd
@@ -28,10 +30,10 @@ if (!(Test-Path -path $dir/CoverageHistory)) {
 }
 
 # Generate the Code Coverage HTML Report
-reportgenerator -reports:"$dir/**/coverage.cobertura.xml" -targetdir:"$dir/coveragereport" -reporttypes:Html -historydir:$dir/CoverageHistory 
+reportgenerator -reports:"**/coverage.cobertura.xml" -targetdir:coveragereport -reporttypes:Html -historydir:CoverageHistory
 
 # Open the Code Coverage HTML Report (if running on a WorkStation)
 $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
 if ($osInfo.ProductType -eq 1) {
-(& "$dir/coveragereport/index.html")
+ Invoke-Item "$dir/coveragereport/index.html"
 }

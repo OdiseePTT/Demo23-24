@@ -221,14 +221,14 @@ var assemblies = [
   {
     "name": "Hangman",
     "classes": [
-      { "name": "Hangman.HangmanGame", "rp": "Hangman_HangmanGame.html", "cl": 32, "ucl": 0, "cal": 32, "tl": 69, "cb": 8, "tb": 8, "cm": 0, "tm": 0, "lch": [100,100,100], "bch": [0,100,100], "mch": [], "hc": [{ "et": "09/11/2023 - 16:17:44", "cl": 7, "ucl": 0, "cal": 7, "tl": 24, "lcq": 100, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 16:53:55", "cl": 20, "ucl": 0, "cal": 20, "tl": 45, "lcq": 100, "cb": 4, "tb": 4, "bcq": 100, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 17:08:00", "cl": 32, "ucl": 0, "cal": 32, "tl": 69, "lcq": 100, "cb": 8, "tb": 8, "bcq": 100, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
-      { "name": "Hangman.Program", "rp": "Hangman_Program.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [0], "bch": [], "mch": [], "hc": [{ "et": "09/11/2023 - 16:17:44", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 16:53:55", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 17:08:00", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
+      { "name": "Hangman.HangmanGame", "rp": "Hangman_HangmanGame.html", "cl": 32, "ucl": 0, "cal": 32, "tl": 69, "cb": 8, "tb": 8, "cm": 0, "tm": 0, "lch": [100,100,100], "bch": [0,100,100], "mch": [], "hc": [{ "et": "09/11/2023 - 16:17:44", "cl": 7, "ucl": 0, "cal": 7, "tl": 24, "lcq": 100, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 16:53:55", "cl": 20, "ucl": 0, "cal": 20, "tl": 45, "lcq": 100, "cb": 4, "tb": 4, "bcq": 100, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 17:08:00", "cl": 32, "ucl": 0, "cal": 32, "tl": 69, "lcq": 100, "cb": 8, "tb": 8, "bcq": 100, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "10/11/2023 - 15:28:15", "cl": 32, "ucl": 0, "cal": 32, "tl": 69, "lcq": 100, "cb": 8, "tb": 8, "bcq": 100, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
+      { "name": "Hangman.Program", "rp": "Hangman_Program.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [0,0], "bch": [], "mch": [], "hc": [{ "et": "09/11/2023 - 16:17:44", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 16:53:55", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "09/11/2023 - 17:08:00", "cl": 0, "ucl": 3, "cal": 3, "tl": 10, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "10/11/2023 - 15:28:15", "cl": 0, "ucl": 2, "cal": 2, "tl": 9, "lcq": 0, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
     ]},
 ];
 
 var metrics = [{ "name": "Cyclomatic complexity", "abbreviation": "cc", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" }, { "name": "Line coverage", "abbreviation": "cov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }, { "name": "Branch coverage", "abbreviation": "bcov", "explanationUrl": "https://en.wikipedia.org/wiki/Code_coverage" }];
 
-var historicCoverageExecutionTimes = ["09/11/2023 - 16:53:55", "09/11/2023 - 16:17:44"];
+var historicCoverageExecutionTimes = ["09/11/2023 - 17:08:00", "09/11/2023 - 16:53:55", "09/11/2023 - 16:17:44"];
 
 var riskHotspotMetrics = [
 ];

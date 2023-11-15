@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-11-10_15-28-15" tag="">
+  <assembly name="Hangman">
+    <class name="Hangman.HangmanGame" coveredlines="32" coverablelines="32" totallines="69" coveredbranches="8" totalbranches="8" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="Hangman.Program" coveredlines="0" coverablelines="2" totallines="9" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="1" />
+  </assembly>
+</coverage>
