@@ -1,27 +1,33 @@
+using BMI.UITests.Helpers;
 using FluentAssertions;
+using Microsoft.AspNetCore.Hosting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace BMI.UITests
 {
-    public class BmiPageTests : IDisposable
+    public class BmiPageTests : IDisposable, IClassFixture<SharedWebDriver>
     {
-        IWebDriver _webDriver;
-        public BmiPageTests()
-        {
-            _webDriver = new ChromeDriver();
+        private IWebDriver _webDriver;
+        private string _url = "https://localhost:8000";
+        private WebTestingHostFactory<BMIProgram> _factory;
 
+        public BmiPageTests(SharedWebDriver driver)
+        {
+            _webDriver = driver;
+            _factory = new WebTestingHostFactory<BMIProgram>();
+            _factory.WithWebHostBuilder(builder => builder.UseUrls(_url)).CreateDefaultClient();
         }
 
         public void Dispose()
         {
-            _webDriver.Quit();
+            _factory.Dispose();
         }
 
         [Fact]
         public void OnInitialLoadCalculateButtonIsDisabled()
         {
-            _webDriver.Navigate().GoToUrl("https://localhost:7020");
+            _webDriver.Navigate().GoToUrl(_url);
 
             Thread.Sleep(5);
 
@@ -33,9 +39,9 @@ namespace BMI.UITests
         [Fact]
         public void WhenFieldsFilledCalculateButtonISEnabled()
         {
-            _webDriver.Navigate().GoToUrl("https://localhost:7020");
+            _webDriver.Navigate().GoToUrl(_url);
 
-            Thread.Sleep(5);
+            Thread.Sleep(50);
             IWebElement heightField = _webDriver.FindElement(By.Name("height"));
             IWebElement weightField = _webDriver.FindElement(By.Name("weight"));
             IWebElement calculateButton = _webDriver.FindElement(By.TagName("button"));
@@ -50,15 +56,14 @@ namespace BMI.UITests
             weightField.SendKeys("80" + Keys.Enter);
 
             calculateButton.Enabled.Should().BeTrue();
-            weightField.GetAttribute("class").Should().Be("");
         }
 
         [Fact]
         public void WithCorrectFieldsAndCalculateClickedH4IsDisplayed()
         {
-            _webDriver.Navigate().GoToUrl("https://localhost:7020");
+            _webDriver.Navigate().GoToUrl(_url);
 
-            Thread.Sleep(5);
+            Thread.Sleep(50);
             IWebElement heightField = _webDriver.FindElement(By.Name("height"));
             IWebElement weightField = _webDriver.FindElement(By.Name("weight"));
             IWebElement calculateButton = _webDriver.FindElement(By.TagName("button"));

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Todo.UITests.Helpers
+namespace BMI.UITests.Helpers
 {
     public class SharedWebDriver : ChromeDriver
     {

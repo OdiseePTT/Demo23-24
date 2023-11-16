@@ -1,24 +1,25 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Data.Common;
+using Todo.Data;
 using Todo.UITests.Helpers;
 
 namespace Todo.UITests
 {
-    public class RegisterPageTests: IClassFixture<SharedWebDriver>
+    public class RegisterPageTests: BaseTest, IClassFixture<SharedWebDriver>
     {
-        WebDriver _webDriver;
-        string _url = "https://localhost:1234";
-        public RegisterPageTests(SharedWebDriver driver)
-        {
-            _webDriver = driver;
 
-            WebTestingHostFactory<TodoProgram> factory = new WebTestingHostFactory<TodoProgram>();
-            factory.WithWebHostBuilder(builder =>
-            {
-                builder.UseUrls(_url);
-            }).CreateDefaultClient();
+        public RegisterPageTests(SharedWebDriver driver):base(driver)
+        {
+            
         }
 
         [Fact]
@@ -64,5 +65,28 @@ namespace Todo.UITests
             inputPasswordErrorField.Displayed.Should().BeTrue();
             inputEmailErrorField.Displayed.Should().BeTrue();
         }
+
+        [Fact]
+        public void CreateNewUser()
+        {
+            _webDriver.Navigate().GoToUrl(_url + "/Identity/Account/Register");
+
+            IWebElement emailField = _webDriver.FindElement(By.Name("Input.Email"));
+            IWebElement passwordField = _webDriver.FindElement(By.Name("Input.Password"));
+            IWebElement confirmPasswordField = _webDriver.FindElement(By.Name("Input.ConfirmPassword"));
+            IWebElement registerButton = _webDriver.FindElement(By.Id("registerSubmit"));
+
+            emailField.SendKeys("matthias.druwe@odisee2.be");
+            passwordField.SendKeys("Qwer3@tsd");
+            confirmPasswordField.SendKeys("Qwer3@tsd");
+
+
+            registerButton.Click();
+
+            _webDriver.Url.Should().StartWith("https://localhost:1234/Identity/Account/RegisterConfirmation");
+        }
+
+
+
     }
 }
