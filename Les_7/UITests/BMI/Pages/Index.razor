@@ -1,0 +1,44 @@
+﻿@page "/"
+@using System
+
+<div class="container mt-5">
+    <h3 class="mb-4">BMI Calculator</h3>
+
+    <div class="form-group">
+        <label for="height">Height (cm):</label>
+        <input id="height" class="form-control" @bind="height" name="height"/>
+    </div>
+
+    <div class="form-group">
+        <label for="weight">Weight (kg):</label>
+        <input id="weight" class="form-control" @bind="weight"  name="weight"/>
+    </div>
+
+    <button class="btn btn-primary mt-3" id="calculate-btn" @onclick="CalculateBMI" disabled="@(!IsValidInputs())">Calculate BMI</button>
+    <a class="btn btn-primary mt-3" id="calculate-btn" @onclick="CalculateBMI" disabled="@(!IsValidInputs())">Calculate BMI</a>
+    @if (bmiResult != null)
+    {
+        <div class="mt-4">
+            <h4>Your BMI:</h4>
+            <p class="lead">@bmiResult.Value.ToString("0.00")</p>
+            <p class="lead">@bmiResult.Category</p>
+        </div>
+    }
+</div>
+
+@code {
+    private double height;
+    private double weight;
+    private BMIResult bmiResult;
+
+    private void CalculateBMI()
+    {
+        bmiResult = BMICalculator.CalculateBMI(height, weight);
+    }
+
+    private bool IsValidInputs()
+    {
+        return BMICalculator.IsValidInputs(height, weight);
+    }
+
+}
