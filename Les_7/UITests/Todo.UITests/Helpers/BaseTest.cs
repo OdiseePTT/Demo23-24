@@ -15,20 +15,22 @@ using Todo.Data.Entities;
 
 namespace Todo.UITests.Helpers
 {
-    public class BaseTest
+    public class BaseTest : IDisposable
     {
         protected WebDriver _webDriver;
         protected string _url = "https://localhost:1234";
+        private WebApplicationFactory<TodoProgram> _factory;
 
-        ApplicationDbContext _context;
-        UserManager<IdentityUser> _userManager;
+        private ApplicationDbContext _context;
+        private UserManager<IdentityUser> _userManager;
+
         public BaseTest(SharedWebDriver driver)
         {
             _webDriver = driver;
 
-            WebApplicationFactory<TodoProgram> factory = new WebTestingHostFactory<TodoProgram>();
+            _factory = new WebTestingHostFactory<TodoProgram>();
 
-            factory = factory.WithWebHostBuilder(builder =>
+            _factory = _factory.WithWebHostBuilder(builder =>
             {
                 var dbConnection = new SqliteConnection("DataSource=:memory:");
                 dbConnection.Open();
@@ -41,20 +43,25 @@ namespace Todo.UITests.Helpers
 
                     if (descriptor != null) services.Remove(descriptor);
 
-                    services.AddDbContext<ApplicationDbContext>(options => {
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                    {
                         options.UseSqlite(dbConnection);
                     });
                 });
             });
 
-            factory.CreateDefaultClient();
+            _factory.CreateDefaultClient();
 
-            IServiceScope scope = factory.Services.CreateScope();
+            IServiceScope scope = _factory.Services.CreateScope();
             _context = scope.ServiceProvider.GetService<ApplicationDbContext>();
             _context.Database.EnsureCreated();
 
             _userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+        }
 
+        public void Dispose()
+        {
+            _factory.Dispose(); // Dispose om db weg te gooien
         }
 
         protected void AddUser(string username, string password)
@@ -62,14 +69,12 @@ namespace Todo.UITests.Helpers
             IdentityUser user = new IdentityUser("matthias.druwe@odisee.be");
             user.EmailConfirmed = true;
             _userManager.CreateAsync(user, password);
-
         }
 
         protected void AddTodoItem(TodoItem item)
         {
             _context.TodoItems.Add(item);
             _context.SaveChanges();
-
         }
     }
 }

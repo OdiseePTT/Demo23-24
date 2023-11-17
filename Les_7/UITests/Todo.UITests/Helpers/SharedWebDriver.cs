@@ -17,7 +17,7 @@ namespace Todo.UITests.Helpers
         private static ChromeOptions GetOptions()
         {
             ChromeOptions options = new ChromeOptions();
-            options.AddArgument("headless");
+           // options.AddArgument("headless");
             return options;
         }
     }

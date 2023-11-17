@@ -81,7 +81,7 @@ namespace Todo.UITests
             confirmPasswordField.SendKeys("Qwer3@tsd");
 
 
-            registerButton.Click();
+            registerButton.Submit();
 
             _webDriver.Url.Should().StartWith("https://localhost:1234/Identity/Account/RegisterConfirmation");
         }
